@@ -46,7 +46,9 @@ export class AuthService {
     if (profileResponse.password !== loginRequestDto.password) {
       return 'non ok';
     }
-    return this.jwtService.sign({ message: 'funziono' });
+    return {
+      access_token: this.jwtService.sign({ userId: profileResponse.id }),
+    };
     //restituisco il token
   }
 }

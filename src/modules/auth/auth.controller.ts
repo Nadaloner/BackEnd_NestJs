@@ -3,8 +3,10 @@ import { LoginRequestDto, RegisterRequestDto } from './dto/auth.dto';
 import { AuthService } from './auth.service';
 import { isApplicationError } from '@utils/error/errors';
 import { mapProfileEntityToProfileDto } from '../profiles/profile.mapper';
+import { Public } from './auth.decorator';
 
 @Controller('/auth')
+@Public()
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -22,6 +24,7 @@ export class AuthController {
 **/
   }
   @Post('/login')
+  @Public()
   async login(@Body() body: LoginRequestDto) {
     return this.authService.login(body);
   }
